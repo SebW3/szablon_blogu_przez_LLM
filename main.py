@@ -27,7 +27,8 @@ def dodaj_elementy_html(text):
     prompt_system = "Otrzymasz artykuł z tagami HTML nadającemu mu strukturę. " \
                     "Twoim zadaniem jest dodanie tagów <img> w odpowiednich miejscach, w których będzie pasowała grafika. " \
                     'Do każdego tagu dodaj atrybut src="image_placeholder.jpg" oraz ' \
-                    'alt=(opis obrazka na podstawie fragmentu tekstu w którym się znajduje. Tekst zostanie użyty do wygenerowania grafiki). ' \
+                    'alt=(opis obrazka na podstawie fragmentu tekstu w którym się znajduje. Tekst zostanie użyty do wygenerowania grafiki. Każdy z tagów musi zawierać coś z AI). ' \
+                    'Umieść podpisy pod grafikami używając odpowiedniego tagu HTML. Każdy obraz wraz z figcaption musi być w tagu <figure></figure>. ' \
                     'Zwróć cały kod wraz z dodanymi tagami'
     messages = [{"role": "system", "content": prompt_system}, {"role": "user", "content": artykul}]
 
@@ -40,7 +41,11 @@ def dodaj_elementy_html(text):
 print("="*100)
 
 artykul = dodaj_elementy_html(str(soup))
+print(artykul)
 
+# usunięcie niepotrzebnych elementów
+artykul = artykul.replace("```html", "").replace("```", "")#.replace("<body>", "").replace("</body>", "").strip()
 
+# zapisanie do pliku
 with open("artykul.html", "w", encoding="utf-8") as file:
     file.write(artykul)
