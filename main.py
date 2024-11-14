@@ -44,7 +44,7 @@ artykul = dodaj_elementy_html(str(soup))
 print(artykul)
 
 # usunięcie niepotrzebnych elementów
-artykul = artykul.replace("```html", "").replace("```", "")#.replace("<body>", "").replace("</body>", "").strip()
+artykul = artykul.replace("```html", "").replace("```", "").replace("<body>", "<div>").replace("</body>", "</div>").strip()
 
 # zapisanie do pliku
 with open("artykul.html", "w", encoding="utf-8") as file:
