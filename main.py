@@ -9,13 +9,27 @@ text = requests.get("https://cdn.oxido.pl/hr/Zadanie%20dla%20JJunior%20AI%20Deve
 # zamiana typu na string i odpowiednie kodowanie znaków
 soup = BeautifulSoup(text, "html.parser")
 
+print("Treść artykułu")
 print(soup)
 
 def dodaj_elementy_html(text):
     client = OpenAI(api_key=openAI_api_key())
-    prompt_system = "Użyj tagów HTML do stworzenia struktóry tekstu. " \
+    print("Tworzenie struktury...")
+    prompt_system = "Użyj tagów HTML do stworzenia struktury tekstu. " \
                     "Zwróć fragment <body> zawierający czysty HTML, bez CSS ani JS."
     messages = [{"role": "system", "content": prompt_system}, {"role": "user", "content": text}]
+
+    response = client.chat.completions.create(messages=messages, model="gpt-4o-mini", temperature=0)
+
+    artykul = response.choices[0].message.content
+
+    print("Dodawanie tagów <img>...")
+    prompt_system = "Otrzymasz artykuł z tagami HTML nadającemu mu strukturę. " \
+                    "Twoim zadaniem jest dodanie tagów <img> w odpowiednich miejscach, w których będzie pasowała grafika. " \
+                    'Do każdego tagu dodaj atrybut src="image_placeholder.jpg" oraz ' \
+                    'alt=(opis obrazka na podstawie fragmentu tekstu w którym się znajduje. Tekst zostanie użyty do wygenerowania grafiki). ' \
+                    'Zwróć cały kod wraz z dodanymi tagami'
+    messages = [{"role": "system", "content": prompt_system}, {"role": "user", "content": artykul}]
 
     response = client.chat.completions.create(messages=messages, model="gpt-4o-mini", temperature=0)
 
