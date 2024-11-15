@@ -16,7 +16,8 @@ def dodaj_elementy_html(text):
     client = OpenAI(api_key=openAI_api_key())
     print("Tworzenie struktury...")
     prompt_system = "Użyj tagów HTML do stworzenia struktury tekstu. " \
-                    "Zwróć fragment <body> zawierający czysty HTML, bez CSS ani JS."
+                    "Zwróć fragment <body> zawierający czysty HTML, bez CSS ani JS. " \
+                    "Każdą sekcję umieść w tagu div z odpowiednim id"
     messages = [{"role": "system", "content": prompt_system}, {"role": "user", "content": text}]
 
     response = client.chat.completions.create(messages=messages, model="gpt-4o-mini", temperature=0)
