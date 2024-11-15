@@ -21,7 +21,6 @@ def stworz_szablon(artykul):
     return artykul.replace("```html", "").replace("```", "").strip()
 
 
-
 szablon = stworz_szablon(artykul)
 
 with open("szablon.html", "w", encoding="utf-8") as file:

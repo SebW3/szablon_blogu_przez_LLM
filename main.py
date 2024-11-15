@@ -42,7 +42,6 @@ def dodaj_elementy_html(text):
 print("="*100)
 
 artykul = dodaj_elementy_html(str(soup))
-print(artykul)
 
 # usunięcie niepotrzebnych elementów
 artykul = artykul.replace("```html", "").replace("```", "").replace("<body>", "<div>").replace("</body>", "</div>").strip()
