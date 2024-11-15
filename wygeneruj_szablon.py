@@ -8,8 +8,8 @@ with open("artykul.html", "r", encoding="utf-8") as file:
 def stworz_szablon(artykul):
     client = OpenAI(api_key=openAI_api_key())
     print("Tworzenie szablonu...")
-    prompt_system = "Twoim zadaniem jest stworzenie szablonu HTML dla podanego artykułu. " \
-                    "Stwórz CSS i prosty JS. Podpisy obrazów muszą się znajdować pod obrazami. " \
+    prompt_system = "Twoim zadaniem jest stworzenie szablonu HTML dla podanego artykułu. Dodaj tytuł na górze. " \
+                    "Stwórz CSS i prosty JS. Obrazy i ich podpisy muszą mieć taki sam align. " \
                     "Sekcja body ma być pusta (tam będzie artykuł). Stwórz navbar. " \
                     "Wszystkie elementy mają się znajdować w 1 pliku. Zwróć sam kod"
     messages = [{"role": "system", "content": prompt_system}, {"role": "user", "content": artykul}]
@@ -18,7 +18,7 @@ def stworz_szablon(artykul):
 
     artykul = response.choices[0].message.content
 
-    return artykul.replace("```html", "").replace("```", "")
+    return artykul.replace("```html", "").replace("```", "").strip()
 
 
 
