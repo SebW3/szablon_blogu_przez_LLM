@@ -37,3 +37,7 @@ Plik `wygeneruj_szablon.py` generuje szablon HTML zawierający CSS i JS
 ### Uwagi
 Przy każdej generacji pliku `artykul.html` mogą się nieznacznie zmienić alternatywne opisy obrazów oraz ich podpisy. Te zmiany mają taki sam przekaz lub bardzo zbliżony do wcześniejszego opisu.
 Np. z "Etyka w sztucznej inteligencji" na "Etyczne wyzwania związane z AI"
+<br>
+Mogą się pojawić drobne zmiany w kolejności lub wartościach CSS. Komentarze też mogą ulec zmianie
+<br>
+Poza tymi drobnymi zmianami to program generuje za każdym razem taki sam kod
